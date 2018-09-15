@@ -46,7 +46,7 @@ class DevConfig(Config):
         Config: The parent configuration class with General configuration settings
 
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/pitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/carblog'
 
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587

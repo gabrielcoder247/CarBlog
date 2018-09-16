@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+<div class="container-fluid" id="top">
+    <div class="row front-page">
+        <div class="col-md-12">
+            <!-- Flash message -->
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            <h1>Welcome to BeauCar</h1>
+            <div class="scroll">
+                <div class="chevron"><i class="fa fa-chevron-down fa-3x" aria-hidden="true"></i></div>
+                <div class="chevron"><i class="fa fa-chevron-down fa-3x" aria-hidden="true"></i></div>
+                <div class="chevron"><i class="fa fa-chevron-down fa-3x" aria-hidden="true"></i></div>
+                <a class="js-scroll-trigger" href="#blogs-content"><span class="text">Read</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid blogs">
+    <div class="row blogs" id="blogs-content">
+        <div class="col-md-12 blogs-title" >
+            <h1>{{blog_message}}</h1>
+            <h1>Blogs</h1>
+        </div>
+        {% for blog in all_blogs %}
+            <div class="col-md-3 blogs-snippet">
+                {% if blog.photo_url %}
+                <a href="{{url_for('main.blog',id=blog.id)}}">
+                    <img src="{{blog.photo_url}}" alt="Loading Image" class="img-responsive">
+                </a>
+                {% else %}
+                <a href="{{url_for('main.blog',id=blog.id)}}">
+                    <img src="{{url_for('static',filename='img/bg-blog.jpeg')}}" alt="blog-image" class="img-responsive">
+                </a>
+                {% endif %}
+                <div class="blog-snippet-content">
+                    <h3><a href="{{url_for('main.blog',id=blog.id)}}">{{blog.title}}</a></h3>
+                    <hr>
+                    <p class="small"> Posted on: {{blog.date_posted.strftime('%Y-%m-%d %H:%M') }} </p>
+                    <p> {{blog.blog_content|truncate(300)}}<a href="{{url_for('main.blog',id=blog.id)}}">View More</a></p>
+                    {% if current_user.is_authenticated%}
+                    <a href="{{url_for('main.delete_blog',id=blog.id)}}">Delete Blog</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<footer>
+    <div class="container-fluid text-center subscribe" id="subscribe-form">
+        <h2>Be the FIRST to know!</h2>
+        <h4>Enter your email to get the latest articles</h4>
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col-md-12">
+                    {{subscribe_form.hidden_tag()}}
+                    {{subscribe_form.email}}
+                    <br>
+                    {{subscribe_form.name}}
+                    <br>
+                    {{subscribe_form.subscribe}}
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid social text-center">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="#">
+                    <i class="fa fa-facebook fa-2x"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    <i class="fa fa-twitter fa-2x"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    <i class="fa fa-pinterest fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+{% endblock%}

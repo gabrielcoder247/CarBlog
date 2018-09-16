@@ -1,47 +1,70 @@
-from flask import Flask
-from flask_bootstrap import Bootstrap
-from config import config_options
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from flask_uploads import UploadSet,configure_uploads,IMAGES
-from flask_mail import Mail
-from flask_simplemde import SimpleMDE
+import os
+
+class Config:
+    '''
+    General configuration parent class
+    '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/pitch'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+    SECRET_KEY ='12345'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
-login_manager = LoginManager()
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.login'
-
-bootstrap = Bootstrap()
-db = SQLAlchemy()
-photos = UploadSet('photos', IMAGES)
-mail = Mail()
-simple = SimpleMDE()
 
 
-def create_app(config_name):
+    DATABASE_PASS = os.environ.get('DATABASE_PASS')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-    app = Flask(__name__)
-
-    # Creating the app configurations
-    app.config.from_object(config_options[config_name])
-
-    # Initializing flask extensions
-    bootstrap.init_app(app)
-    db.init_app(app)
-    login_manager.init_app(app)
-    mail.init_app(app)
-    simple.init_app(app)
-
-     # Registering the blueprint
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
+    MAIL_SERVER=os.environ.get('MAIL_SERVER')
+    MAIL_PORT=os.environ.get('MAIL_PORT')
+    MAIL_USE_TLS=os.environ.get('MAIL_USE_TLS')
+    MAIL_USERNAME=os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD')
+    sender = os.environ.get('MAIL_USERNAME')
 
 
-    # configure uploads
-    configure_uploads(app,photos)
 
 
-    return app
+
+class ProdConfig(Config):
+    '''
+    Production  configuration child class
+
+    Args:
+        Config: The parent configuration class with General configuration settings
+    '''
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+  
+
+class DevConfig(Config):
+    
+    '''
+    Development  configuration child class
+
+    Args:
+        Config: The parent configuration class with General configuration settings
+
+    '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/carblog'
+
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = 'gabrielcoder247@gmail.com'
+    MAIL_PASSWORD = 'dushanbe2015'
+    SUBJECT_PREFIX = 'pitchit'
+    SENDER_EMAIL = 'gabrielcoder247@gmail.com'
+    sender='gabrielcoder247@gmail.com'
+
+
+    
+
+    DEBUG = True
+
+config_options ={
+    'development':DevConfig,
+    'production':ProdConfig
+}
+
+

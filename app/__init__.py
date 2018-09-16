@@ -1,68 +1,49 @@
-import os
 
-class Config:
-    '''
-    General configuration parent class
-    '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/pitch'
-    UPLOADED_PHOTOS_DEST ='app/static/photos'
-    SECRET_KEY ='12345'
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+from flask import Flask
+from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+from flask_simplemde import SimpleMDE
+from config import config_options
 
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'admin.login'
 
+bootstrap = Bootstrap()
+db = SQLAlchemy()
+mail = Mail()
+photos = UploadSet('photos',IMAGES)
+simple = SimpleMDE()
 
-
-    DATABASE_PASS = os.environ.get('DATABASE_PASS')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
-
-    MAIL_SERVER=os.environ.get('MAIL_SERVER')
-    MAIL_PORT=os.environ.get('MAIL_PORT')
-    MAIL_USE_TLS=os.environ.get('MAIL_USE_TLS')
-    MAIL_USERNAME=os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD')
-    sender = os.environ.get('MAIL_USERNAME')
-
-
-
-
-
-class ProdConfig(Config):
-    '''
-    Production  configuration child class
-
-    Args:
-        Config: The parent configuration class with General configuration settings
-    '''
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-  
-
-class DevConfig(Config):
+def create_app(config_name):
     
-    '''
-    Development  configuration child class
+    app = Flask(__name__)
 
-    Args:
-        Config: The parent configuration class with General configuration settings
+    # app configurations
+    app.config.from_object(config_options[config_name])
 
-    '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/carblog'
+    # initializing flask extensions
+    config_options[config_name].init_app(app)
+    db.init_app(app)
+    bootstrap.init_app(app)
+    mail.init_app(app)
+    login_manager.init_app(app)
+    simple.init_app(app)
 
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USERNAME = 'gabrielcoder247@gmail.com'
-    MAIL_PASSWORD = 'dushanbe2015'
-    SUBJECT_PREFIX = 'pitchit'
-    SENDER_EMAIL = 'gabrielcoder247@gmail.com'
-    sender='gabrielcoder247@gmail.com'
+    # Register the main app blueprint
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    # adding the admin app blueprint
+    from .admin import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+
+    configure_uploads(app,photos)
+
+    return ap
 
 
-    
 
-    DEBUG = True
-
-config_options ={
-    'development':DevConfig,
-    'production':ProdConfig
-}

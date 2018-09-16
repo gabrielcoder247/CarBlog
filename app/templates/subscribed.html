@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center" id="blog-top">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>You have been subscribed!</h1>
+            <h4><a href="{{url_for('main.index')}}">Click here</a> to redirect to homepage</h4>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container-fluid one-page social text-center">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="#">
+                    <i class="fa fa-facebook fa-2x"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    <i class="fa fa-twitter fa-2x"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    <i class="fa fa-pinterest fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+{% endblock %}

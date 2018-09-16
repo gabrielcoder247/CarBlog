@@ -24,9 +24,10 @@ def create_app(config_name):
 
     # app configurations
     app.config.from_object(config_options[config_name])
+    
 
     # initializing flask extensions
-    config_options[config_name].init_app(app)
+    # config_options[config_name].init_app(app)
     db.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)
@@ -43,7 +44,7 @@ def create_app(config_name):
 
     configure_uploads(app,photos)
 
-    return ap
+    return app
 
 
 

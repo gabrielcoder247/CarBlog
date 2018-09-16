@@ -1,0 +1,13 @@
+<p style="color: red;">
+    Dear {{ user.username|capitalize }},</p>
+<p>
+    Congratulations!
+    <br>
+    You have been added as a contributor for the BeauCar blog.!
+</p>
+<p>Use - {{pass_key}} - as the password</p>
+<br>
+<p>Follow this link to login:</p>
+<p>{{ url_for('admin.login', _external=True) }}</p>
+<p>Sincerely,</p>
+<p>BeauCar Blog</p>

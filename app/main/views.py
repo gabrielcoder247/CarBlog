@@ -7,7 +7,7 @@ from .forms import BlogForm, CommentForm, EmailForm
 from datetime import datetime
 from time import time, sleep
 from ..user_emails import send_subscriptions, send_blogs
-import markdown2
+import markdown
 
 @main.route('/', methods = ['GET','POST'])
 def index():

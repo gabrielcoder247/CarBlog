@@ -4,7 +4,7 @@ from app.models import User, Blog, Email
 from app import create_app,db
 import unittest
 
-app = create_app('development')
+app = create_app('production')
 
 # Initializing extensions
 manager = Manager(app)
@@ -27,5 +27,6 @@ def test():
     unittest.TextTestRunner(verbosity=2).run(tests)
 
 if __name__ == '__main__':
+    app.secret_key='12345'
     manager.run()
 

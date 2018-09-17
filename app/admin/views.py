@@ -7,7 +7,6 @@ from . import admin
 from ..email import send_email, send_reset_email, send_registration_email
 
 @admin.route('/register', methods = ['GET','POST'])
-@login_required
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -20,7 +19,7 @@ def register():
         # send_email(subject="Registration", sender=os.environ.get('MAIL_USERNAME'),recepients=[user.email],text_body='Test Email',html_body=render_template('500.html'))
         send_registration_email(user, pass_key)
 
-        return redirect(url_for('admin.login'))
+       
     
     title = "Create New Account"
 

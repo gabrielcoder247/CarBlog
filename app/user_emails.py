@@ -11,7 +11,7 @@ def send_email(subject, sender, recepients, text_body, html_body):
     mail.send(msg)
 
 def send_subscriptions(new_subscription):
-    send_email('Subscribed to BeauCars Blog',sender=os.environ.get('MAIL_USERNAME'),recepients=[new_subscription.email_data],text_body=render_template('emails/subscribed.txt', new_subscription=new_subscription),html_body=render_template('emails/subscribed.html', new_subscription=new_subscription))
+    send_email('Subscribed to ExcellaCar Blog',sender=os.environ.get('MAIL_USERNAME'),recepients=[new_subscription.email_data],text_body=render_template('emails/subscribed.txt', new_subscription=new_subscription),html_body=render_template('emails/subscribed.html', new_subscription=new_subscription))
 
 def send_blogs(blog):
     subscribers = Email.query.order_by('-id').all()

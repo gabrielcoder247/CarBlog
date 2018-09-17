@@ -90,7 +90,7 @@ def update_pic(id):
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         blog.blog_pic = path
-        # user_photo = PhotoProfile(pic_path = path,user = user)
+       
         db.session.commit()
     return redirect(url_for('main.blog',id=id))
 
@@ -123,6 +123,5 @@ def delete_blog(id):
 def subscribed():
     
     sleep(5)
-    # return redirect(url_for('main.index'))
 
     return render_template('subscribed.html', title = 'Subscribed!')

@@ -4,6 +4,7 @@ class Config:
     '''
     General configuration parent class
     '''
+    
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/pitch'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     SECRET_KEY ='12345'

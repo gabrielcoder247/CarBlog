@@ -7,6 +7,7 @@ from . import admin
 from ..email import send_email, send_reset_email, send_registration_email
 
 @admin.route('/register', methods = ['GET','POST'])
+# @login_required
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():

@@ -2,7 +2,7 @@
 {% import 'macros.html' as macro %}
 
 {% block content %}
-<div class="container-fluid" id="top">
+<div class="container-fluid" id="top" style = "background-image: url('/static/images/cars2.jpeg');background-size:cover">
     <div class="row front-page">
         <div class="col-md-12">
             <!-- Flash message -->
@@ -12,7 +12,7 @@
                 {{ message }}
             </div>
             {% endfor %}
-            <h1>Welcome to ExcellaCar Blog</h1>
+            <h1 style = 'color: white'>Welcome to ExcellaCar Blog</h1>
             <div class="scroll">
                 <div class="chevron"><i class="fa fa-chevron-down fa-3x" aria-hidden="true"></i></div>
                 <div class="chevron"><i class="fa fa-chevron-down fa-3x" aria-hidden="true"></i></div>
@@ -36,7 +36,7 @@
                 </a>
                 {% else %}
                 <a href="{{url_for('main.blog',id=blog.id)}}">
-                    <img src="{{url_for('static',filename='img/bg-blog.jpeg')}}" alt="blog-image" class="img-responsive">
+                    <img src="{{url_for('static',filename='images/car.jpeg')}}" alt="blog-image" class="img-responsive">
                 </a>
                 {% endif %}
                 <div class="blog-snippet-content">

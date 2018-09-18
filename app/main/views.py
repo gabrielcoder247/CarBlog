@@ -26,7 +26,7 @@ def index():
         send_subscriptions(new_subscription)
         return redirect(url_for('main.subscribed'))
 
-    title = 'Home | Beaucar'
+    title = 'Home | ExcellaCar'
 
     all_blogs = Blog.get_all_blogs()
 

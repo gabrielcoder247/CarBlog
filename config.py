@@ -53,7 +53,7 @@ class DevConfig(Config):
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = 'gabrielcoder247@gmail.com'
-    MAIL_PASSWORD = 'dushanbe2015'
+    MAIL_PASSWORD = '@dushanbe2015'
     SUBJECT_PREFIX = 'pitchit'
     SENDER_EMAIL = 'gabrielcoder247@gmail.com'
     sender='gabrielcoder247@gmail.com'

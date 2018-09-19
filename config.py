@@ -8,13 +8,12 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/pitch'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
 
 
-    DATABASE_PASS = os.environ.get('DATABASE_PASS')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    # DATABASE_PASS = os.environ.get('DATABASE_PASS')
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     MAIL_SERVER=os.environ.get('MAIL_SERVER')
@@ -47,16 +46,15 @@ class DevConfig(Config):
         Config: The parent configuration class with General configuration settings
 
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:dushanbe2015@localhost/carblog'
-
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USERNAME = 'gabrielcoder247@gmail.com'
-    MAIL_PASSWORD = '@dushanbe2015'
-    SUBJECT_PREFIX = 'pitchit'
-    SENDER_EMAIL = 'gabrielcoder247@gmail.com'
-    sender='gabrielcoder247@gmail.com'
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    # MAIL_SERVER = 'smtp.googlemail.com'
+    # MAIL_PORT = 587
+    # MAIL_USE_TLS = True
+    # MAIL_USERNAME = 'gabrielcoder247@gmail.com'
+    # MAIL_PASSWORD = '@dushanbe2015'
+    # SUBJECT_PREFIX = 'pitchit'
+    # SENDER_EMAIL = 'gabrielcoder247@gmail.com'
+    # sender='gabrielcoder247@gmail.com'
 
 
     

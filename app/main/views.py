@@ -54,7 +54,7 @@ def create_blog():
         send_blogs(new_blog)
         return redirect(url_for('main.blog',id=new_blog.id))
 
-    return render_template('create_blog.html', title = 'Create Blog', blog_form = blog_form)
+    return render_template('createBlog.html', title = 'Create Blog', blog_form = blog_form)
 
 @main.route('/blog/<int:id>', methods=['GET','POST'])
 def blog(id):
